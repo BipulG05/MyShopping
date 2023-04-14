@@ -7,7 +7,7 @@ function ProductCard({product}) {
         edit:false,
         color:"rgba(20,20,20,0.1)",
         activeColor:"tomato",
-        size:window.innerWidth < 600 ? 20 : 25,
+        size:window.innerWidth < 600 ? 7 : 23,
         value:product.ratings,
         isHalf:true,
     };

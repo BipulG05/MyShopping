@@ -48,7 +48,8 @@ const LoginSign = ({history}) => {
         if(e.target.name === 'avatar'){
             const reader = new FileReader();
             reader.onload = () =>{
-                if(ReadableStream.readyState === 2){
+                // console.log(reader.readyState);
+                if(reader.readyState === 2){
                     setavatarPreview(reader.result);
                     setAvatar(reader.result);
                 }
@@ -64,6 +65,7 @@ const LoginSign = ({history}) => {
             dispath(clearError());
         }
         if(isAuthenticated){
+            // console.log("here");
             history.push("/account")
         }
     },[alert,dispath,isAuthenticated,history])

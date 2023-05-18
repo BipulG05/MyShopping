@@ -5,13 +5,13 @@ import MetaData from '../layout/MetaData';
 const Search = ({history}) => {
     const [keyword,setKeyword] = useState("");
     const searchSubmitHandler = (e) =>{
-        console.log(e)
+        // console.log(e)
         e.preventDefault();
         if(keyword.trim()){
             history.push(`/products/${keyword}`);
         }
         else{
-            history.push("/products");
+            history.push("/products"); 
         }
     };
   return (

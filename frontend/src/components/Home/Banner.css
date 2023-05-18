@@ -1,0 +1,62 @@
+.banner-s{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color:rgba(255, 255, 255, 0.955);
+}
+
+.carousl1
+{
+    width: 100%;
+    text-align:center;
+}
+.CarouselImage1{
+    width: 100%;
+    height: 100vmin;
+}
+.product{
+    position: absolute;
+    top:30%;
+    right: auto;
+    overflow: hidden;
+    z-index: 2;
+}
+.product > h1{
+    font:600 2.5vmax "Roboto"; 
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+}
+.product > p{
+    margin-bottom: 5vmax;
+    font:300 1.8vmax "Lucida Sans";
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+}
+
+.product > a > button{
+    margin-top: 5vmax;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 0;
+    padding: 1vmax;
+    transition: all 0.5;
+    width: 9vmax;
+    font: 500 1vmax "Roboto";
+
+}
+
+.product > a > button:hover{
+    background-color: black;
+    color:white;
+}
+
+@media screen and (max-width:600px) {
+    .product{
+        top:8%;
+        right: auto;
+    }
+}
+
+
+

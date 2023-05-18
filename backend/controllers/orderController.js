@@ -12,14 +12,17 @@ exports.newOrder = catchAsyncError(
             orderItems,
             paymentInfo,
             itemsPrice,
+            taxPrice,
             shippingPrice,
             totalPrice,
         } = req.body;
+        
         const order = await Order.create({
             shippingInfo,
             orderItems,
             paymentInfo,
             itemsPrice,
+            taxPrice,
             shippingPrice,
             totalPrice,
             paidAt:Date.now(),
@@ -84,11 +87,13 @@ exports.updateOrderStatus = catchAsyncError(
         if(order.orderStatus === "Delivered"){
             return next(new ErrorHandler("The Order was already delivered ",400));
         }
-
-        order.orderItems.forEach(
-           async (i_order) => {
-                await updateStock(i_order.product.toString(),i_order.quantity);
-            });
+        if(req.body.status === "Shipped"){
+            order.orderItems.forEach(
+                async (i_order) => {
+                     await updateStock(i_order.product.toString(),i_order.quantity);
+                 });
+        }
+       
 
         order.orderStatus = req.body.status;
 
@@ -105,7 +110,7 @@ exports.updateOrderStatus = catchAsyncError(
 
 async function updateStock(id,quantity){
     const product = await Product.findById(id);
-    console.log(id,product)
+    // console.log(id,product)
     product.stock -= quantity;
     await product.save({validateBeforeSave:false});
 }

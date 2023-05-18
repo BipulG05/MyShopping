@@ -7,6 +7,7 @@ import {clearError,getProduct} from '../../actions/productAction'
 import {useSelector,useDispatch} from 'react-redux'
 import Loader from '../layout/Loader/Loder';
 import { useAlert } from 'react-alert';
+import Banner from './Banner';
  
 function Home() {
   // const product ={
@@ -33,22 +34,22 @@ function Home() {
       <Loader/>
        :
       <Fragment>
-      <MetaData title="MyShop"/>
-      <div className="banner">
-        <p>Welcome to Myshop</p> 
-        <h1>FIND AMAZING PRODUCTS BELOW</h1>
-     
-        <a href='#container'>
-          <button>
-            Scroll <CgMouse/>  
-          </button> 
-        </a>
-      </div>
-      <h2 className='homeHeading'>Featured Products</h2>
-      <div className="container" id='container'>
-        {products && products.map((product) => <Product product={product}/> )}
-      </div>
-    </Fragment>
+        <MetaData title="MyShop"/>  
+        {/* <div className="banner">
+          <p>Welcome to Myshop</p> 
+          <h1>FIND AMAZING PRODUCTS BELOW</h1>  
+          <a href='#container'>
+            <button>
+              Scroll <CgMouse/>  
+            </button> 
+          </a>
+        </div> */} 
+        <Banner/> 
+        <h2 className='homeHeading'>Featured Products</h2>
+        <div className="container" id='container'>
+          {products && products.map((product) => <Product product={product}/> )}
+        </div>
+    </Fragment> 
       }
     </Fragment>
   )

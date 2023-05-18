@@ -27,7 +27,7 @@ class Apifeatures {
         // console.log(queryCopy)
 
         //filter for price and rating
-        console.log(queryCopy)
+        // console.log(queryCopy)
 
         let queryStr = JSON.stringify(queryCopy);
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g,key => `$${key}`);
@@ -35,7 +35,7 @@ class Apifeatures {
 
 
         this.query = this.query.find(JSON.parse(queryStr));
-        console.log(queryStr)
+        // console.log(queryStr)
 
         return this;
     }

@@ -68,7 +68,7 @@
     box-sizing: border-box;
     border: 1px solid rgba(0,0,0,0.278);
     border-radius:4px;
-    font: 300 0.9vmax "cursive";
+    font: 300 0.9vmax "Cursive";
     outline: none;
 }
 .loginForm > div> svg,
@@ -103,7 +103,7 @@
     height: 5vh;
     border: none;
     margin: 0%;
-    font: 400 0.8vmax cursive;
+    font: 400 0.8vmax Cursive;
     transition: all 0.5s;
     padding: 0 1vmax;
     color: rgba(0, 0, 0, 0.623);
@@ -167,7 +167,7 @@
     .loginForm > div > input,
     .signForm > div > input {
       padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax cursive;
+      font: 300 1.7vmax Cursive;
     }
   
     .loginForm > div > svg,
@@ -186,7 +186,7 @@
   
     #registerImage > input::file-selector-button {
       height: 7vh;
-      font: 400 1.8vmax cursive;
+      font: 400 1.8vmax Cursive;
     }
   
     .loginButton,

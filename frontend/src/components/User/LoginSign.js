@@ -3,13 +3,15 @@ import './LoginSign.css';
 import Loder from '../layout/Loader/Loder';
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
-import LockOpenIcon from '@material-ui/icons/LockOpen'
-import FaceIcon from '@material-ui/icons/Face'
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import FaceIcon from '@material-ui/icons/Face';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearError, login,register } from '../../actions/userAction';
 import { useAlert } from 'react-alert';
 
-const LoginSign = ({history}) => {
+
+
+const LoginSign = ({history,location}) => {
     const dispath = useDispatch();
     const alert = useAlert()
     const {error,loading,isAuthenticated} = useSelector((state) => state.user)
@@ -59,16 +61,17 @@ const LoginSign = ({history}) => {
             setUser({...user,[e.target.name]:e.target.value});
         } 
     }
-    useEffect ((error)=>{
+    const redirect = location.search?location.search.split("=")[1] : "/account";
+    useEffect (()=>{
         if(error){
             alert.error(error);
             dispath(clearError());
         }
+        
         if(isAuthenticated){
-            // console.log("here");
-            history.push("/account")
+            history.push(redirect);
         }
-    },[alert,dispath,isAuthenticated,history])
+    },[alert,redirect,error,dispath,isAuthenticated,history,location]);
     const switchTabs = (e,tab) => {
         if(tab ==="Login"){
             switchTab.current.classList.add("shiftToNeutral");
@@ -76,7 +79,7 @@ const LoginSign = ({history}) => {
             registerTab.current.classList.remove("shiftToNeutralForm");
             loginTab.current.classList.remove("shiftToLeft");
         }
-        if(tab==="Register"){
+        if(tab==="Register"){ 
             switchTab.current.classList.add("shiftToRight");
             switchTab.current.classList.remove("shiftToNeutral");
             registerTab.current.classList.add("shiftToNeutralForm");
@@ -110,8 +113,8 @@ const LoginSign = ({history}) => {
                         <div className='loginPassword'>
                             <LockOpenIcon/>
                             <input type="password" value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)} placeholder='Password' required/>
-                        </div>
-                        <Link to="/password/forgot">Forget Password ?</Link>
+                        </div> 
+                        <Link to="/password/forgot">Forgot Password ?</Link>
                         <input type='submit' value='Login' className='loginButton' />
                     </form>
                     <form className='signForm' ref={registerTab} encType='multipart/from-data' onSubmit={registerSubmit} >

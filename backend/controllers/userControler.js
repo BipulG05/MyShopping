@@ -17,7 +17,7 @@ exports.registerUser = catchAsyncError(
             width:150,
             crop:"scale",
         });
-        console.log("MyCloud",myCloud);
+        // console.log("MyCloud",myCloud);
         const {name,email,password} = req.body;
         const user = await User.create({
             name,email,password,
@@ -74,8 +74,8 @@ exports.logout = catchAsyncError(
         });
     });
 
-//forget password
-exports.forgetPassword = catchAsyncError(
+//forgot password
+exports.forgotPassword = catchAsyncError(
     async(req,res,next)=>{
         const user = await User.findOne({"email":req.body.email});
         if(!user){
@@ -87,14 +87,16 @@ exports.forgetPassword = catchAsyncError(
         await user.save({validateBeforeSave:false});
 
 
-        const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+        // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+        const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+
 
         const message = `Your password reset token is : \n\n ${resetPasswordUrl} \n\nIf you do not request this email then please ignore this email`;
 
         try{
-            await sendEmail({
+            await sendEmail({ 
                 email:user.email,
-                subject:`MyShop Forget password`,
+                subject:`MyShop forgot password`,
                 message,
 
             });
@@ -124,7 +126,7 @@ exports.resetPassword = catchAsyncError(
         if(!user){
             return next(new ErrorHandler("Reset Password Token is Invalid or Expired",400));
         };
-        if(req.body.password !== req.body.cofirmPassword){
+        if(req.body.password !== req.body.confirmPassword){
             return next(new ErrorHandler('Password does not match ',400))
         }
         user.password = req.body.password;
@@ -132,7 +134,7 @@ exports.resetPassword = catchAsyncError(
         user.resetPasswordToken = undefined;
 
         await user.save();
-        sendEmail(user,200,res);
+        sendToken(user,200,res);
 
     })
 
@@ -140,8 +142,6 @@ exports.resetPassword = catchAsyncError(
 exports.getUserDetails = catchAsyncError(
     async(req,res,next)=>{
         const user = await User.findById(req.user.id);
-
-
         res.status(200).json({
             success:true,
             user,
@@ -151,14 +151,12 @@ exports.getUserDetails = catchAsyncError(
 // update user password
 exports.updateUserPassword = catchAsyncError(
     async(req,res,next)=>{
-
         const user = await User.findById(req.user.id).select("+password");
         const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
-        
         if(!isPasswordMatched){
             return next(new ErrorHandler("Old Password is incorrect",400));
         }
-        if(req.body.newPassword !== req.body.cofirmPassword){
+        if(req.body.newPassword !== req.body.confirmPassword){
             return next(new ErrorHandler('Password does not match ',400))
         }
         user.password = req.body.newPassword;
@@ -170,12 +168,28 @@ exports.updateUserPassword = catchAsyncError(
 // update user details
 exports.updateUserDetails = catchAsyncError(
     async(req,res,next)=>{
-        console.log(req.body.name,req.body.email)
+        // console.log(req.body.name,req.body.email)
         const newUserDetails = {
             name:req.body.name,
             email:req.body.email,
         };
         // avater will update later
+        if(req.body.avatar!==""){
+            const user = await User.findById(req.user.id);
+            const imageid = user.avatar.public_id;
+            await cloudinary.v2.uploader.destroy(imageid);
+            const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
+                folder:"avatars",
+                width:150,
+                crop:"scale",
+            });
+            newUserDetails.avatar = {
+                public_id : myCloud.public_id,
+                url : myCloud.secure_url,
+            }
+        }
+
+
         const user = await User.findByIdAndUpdate(req.user.id,newUserDetails,{
             new:true,
             runValidators:true,
@@ -183,7 +197,6 @@ exports.updateUserDetails = catchAsyncError(
         });
         res.status(200).json({
             success:true,
-            // user
         })
 
     })
@@ -216,21 +229,26 @@ exports.getUserProfile = catchAsyncError(
 // update user Role - admin
 exports.updateUserRole = catchAsyncError(
     async(req,res,next)=>{
-        console.log(req.body.role,req.params.id)
+        // console.log(req.body.role,req.params.id)
         const newUserDetails = {
             name:req.body.name,
             email:req.body.email,
             role:req.body.role,
         };
+        // let user = User.findById(req.params.id);
+        // if(!user){
+        //     return next(
+        //         new ErrorHandler(`User does not exist with ID: ${req.params.id}`,400)
+        //     );
+        // }
         // avater will update later
-        const user = await User.findByIdAndUpdate(req.params.id,newUserDetails,{
+        await User.findByIdAndUpdate(req.params.id,newUserDetails,{
             new:true,
             runValidators:true,
             userFindAndModify:false,
         });
         res.status(200).json({
             success:true,
-            // user
         })
 
     })
@@ -238,11 +256,14 @@ exports.updateUserRole = catchAsyncError(
 // delete user
 exports.deleteUser= catchAsyncError(
     async(req,res,next)=>{
-        // we will remov avater will update later
         const user = await User.findById(req.params.id);
         if(!user){
             return next(new ErrorHandler(`User does not exits with this id:${req.param.id}`));
         };
+
+        const imageid = user.avatar.public_id;
+        await cloudinary.v2.uploader.destroy(imageid);
+
         await user.remove();
         res.status(200).json({
             success:true,

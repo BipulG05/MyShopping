@@ -1,9 +1,31 @@
-const nodemailer = require('nodemailer');
+const nodeMailer = require('nodemailer');
 
 const sendEmail = async (options) =>{
 
+    // console.log(process.env.SMPT_PORT,process.env.SMPT_MAIL,process.env.SMPT_PASSWORD)
+    const transporter = nodeMailer.createTransport({
+        host:process.env.SMPT_HOST,
+        service:process.env.SMPT_SERVICE,
+        port:process.env.SMPT_PORT,
+        secure:false,
+        auth:{
+            user:process.env.SMPT_MAIL,
+            pass:process.env.SMPT_PASSWORD,
+        },
+    });
+    // console.log("options.message",options.message)
+    const mailoptions = {
+        from:process.env.SMPT_MAIL,
+        to:options.email,
+        subject:options.subject,
+        text:options.message,
+        html:`<b>hello from myshop ${options.message}</b>`
+    };
+    await transporter.sendMail(mailoptions);
 
-    // let testAccount = await nodemailer.createTestAccount();
+
+
+     // let testAccount = await nodemailer.createTestAccount();
 
     // // create reusable transporter object using the default SMTP transport
     // let transporter = nodemailer.createTransport({
@@ -30,35 +52,6 @@ const sendEmail = async (options) =>{
 
     // // Preview only available when sending through an Ethereal account
     // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-
-
-
-
-
-
-
-
-
-    // console.log(process.env.SMPT_PORT,process.env.SMPT_MAIL,process.env.SMPT_PASSWORD)
-    const transporter = nodeMailer.createTransport({
-        host:process.env.SMPT_HOST,
-        service:process.env.SMPT_SERVICE,
-        port:process.env.SMPT_PORT,
-        secure:true,
-        auth:{
-            user:process.env.SMPT_MAIL,
-            pass:process.env.SMPT_PASSWORD,
-        },
-    });
-    const mailoptions = {
-        from:process.env.SMPT_MAIL,
-        to:options.email,
-        subject:options.subject,
-        text:options.message,
-        html:"<b>hello from myshop</b>"
-    };
-    await transporter.sendMail(mailoptions);
 }
 
 module.exports = sendEmail

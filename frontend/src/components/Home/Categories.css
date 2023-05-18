@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.categoriesPage{
+    margin: 2vmax;
+    background-color: rgba(255,255,255,0.999);
+}
+.categoriesPage > {
+    width: 100% !important;
+    height: 20px;
+    background-color: rgba(1, 1, 1, 0.989);
+}
+.categorySepater{
+    width: 100%;
+    height: 1px;
+    margin-top: 1vmax;
+    margin-bottom: 1vmax;
+    background-color: rgba(0, 0, 0, 0.196);
+}
+.categoriesPage > h2{
+    font:400 2rem "Roboto";
+    color: rgba(0, 0, 0, 0.509);
+    width: fit-content;
+    border-bottom: 1px solid rgba(22, 22, 22, 0.409);
+    margin-bottom: 2vmax;
+}
+.categorySepater{
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.566);
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.156));
+}
+.categoriesContainer{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.309);
+
+}
+.categoriesContainer > a{
+    display: flex;
+    flex-direction: column;
+    color: rgb(0,0,0);
+    font: 300 2rem "Roboto";
+    text-align: center;
+    background-color: rgba(255, 255,255,0.8);
+    text-decoration: none;
+    width: 10vmax;
+    height: 10vmax;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.categoriesContainer > a > img{
+    width: 10vmax;
+    height: 13vmax;
+    border-radius: 40%;
+}
+.categoriesContainer > a > p{
+    font: 300 1.1rem "Cursive";
+}
+.moreOnShopContainer{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.209);
+}
+
+.moreOnShopContainer > a{
+    display: flex;
+    flex-direction: column;
+    color: rgb(0,0,0);
+    font: 300 2rem "Roboto";
+    text-align: center;
+    background-color: rgba(255, 255,255,0.8);
+    text-decoration: none;
+    width: 10vmax;
+    height: 10vmax;
+    justify-content: center;
+    align-items: center;
+}
+.moreOnShopContainer > a > img{
+    width: 9vmax;
+    height: 9vmax;
+    border-radius: 50%;
+}
+.moreOnShopContainer > a > p{
+    font: 300 1.1rem "Cursive";
+}
+.trandingStoreContainer{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.109);
+}
+.trandingStoreContainer > a{
+    display: flex;
+    flex-direction: column;
+    color: rgb(0,0,0);
+    font: 300 2rem "Roboto";
+    text-align: center;
+    background-color: rgba(255, 255,255,0.8);
+    text-decoration: none;
+    width: 12vmax;
+    height: 10vmax;
+
+}
+.trandingStoreContainer > a > img{
+    width: 12vmax;
+    height: 10vmax;
+}
+.trandingStoreContainer > a > p{
+    font: 300 1.1rem "Cursive";
+}
+.trandingStoreContainerHeadingBox{
+    position: absolute;
+}
+.trandingStoreContainerHeadingBox > p{
+    color: white;
+}
+.trandingStoreContainerHeadingBox > p:first-child{
+    font: 300 1.5rem "Cursive";
+}
+.trandingStoreContainerHeadingBox > p:last-child{
+    font: 300 1rem "Cursive";
+}
+
+
+
+
+@media screen and (max-width:600px) {
+    .categoriesPage{
+        margin: auto;
+    }
+    .categoriesPage > h2{
+        font:200 1.5rem "Roboto";
+        margin: auto;
+        margin-top: 1rem ;
+        margin-bottom: 1rem;
+    }
+    .categoriesContainer{
+        gap: 0.5rem;
+    }
+    .categoriesContainer > a{
+        width: 4.2rem;
+        padding: 0.5rem;
+    }
+    .categoriesContainer > a > img{
+        width: 5rem;
+    }
+    .categoriesContainer > a > p{
+        font: 100 0.7rem "Cursive";
+    }
+   
+    
+    
+}

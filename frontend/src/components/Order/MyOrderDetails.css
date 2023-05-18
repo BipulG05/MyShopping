@@ -1,0 +1,97 @@
+
+.orderDetailsPage{
+    background-color: white;
+}
+.orderDetailsContainer > h1{
+    font:300 3vmax "Roboto";
+    margin: 4vmax 0;
+    color: rgb(123, 115, 115);
+    border-bottom: 1px solid rgb(103, 95, 95);
+    width: fit-content;
+}
+.orderDetailsContainer {
+    padding: 5vmax;
+    padding-bottom: 0%;
+}
+.orderDetailsContainer > p{
+    font: 400 1.8vmax "Roboto";
+}
+.orderDetailsContainerBox,
+.orderDetailsContainer{
+    margin: 2vmax;
+}
+.orderDetailsContainerBox > div {
+    display: flex;
+    margin: 1vmax 0;
+}
+.orderDetailsContainerBox > div >p{
+    font:400 1vmax "Roboto";
+    color: black;
+}
+.orderDetailsContainerBox > div >span{
+    margin: 0 1vmax;
+    font: 100 1vmax "Roboto";
+    color: #575757;
+}
+.orderDetailsOrderItems > p{
+    font: 400 1.8vmax "Roboto";
+}
+.orderDetailsOrderItems {
+    padding: 2vmax 5vmax;
+    border-top: 1px solid rgba(0,0,0,0.164);
+}
+.orderDetailsOrderItemsContainer > div{
+    display: flex;
+    font: 400 1vmax "Roboto";
+    align-items: center;
+    margin: 2vmax 0;
+}
+.orderDetailsOrderItemsContainer > div > img{
+    width: 4vmax;
+}
+.orderDetailsOrderItemsContainer > div > a{
+    color:#575757;
+    margin: 0 2vmax;
+    width: 60%;
+    text-decoration: none;
+}
+.orderDetailsOrderItemsContainer > div >span{
+    font: 100 1vmax "Roboto";
+    color: #5e5e5e;
+}
+
+@media screen and (max-width:600px) {
+    .orderDetailsContainer > h1{
+        font:300 1.5vmax "Roboto";
+    }
+    .orderDetailsContainer > p{
+        font: 400 6vw "Roboto";
+    }
+    .orderDetailsContainerBox > div{
+        margin: 6vw 0;
+    }
+    .orderDetailsContainerBox > div > p{
+        font:400 4vw "Roboto"
+    }
+    .orderDetailsContainerBox > div > span{
+        font:100 4vw "Roboto"
+    }
+    .orderDetailsOrderItems > p{
+        font:400 6vw "Roboto"
+    }
+    .orderDetailsOrderItemsContainer > div{
+        font:400 4vw "Roboto";
+        margin: 4vw 0;
+    }
+    .orderDetailsOrderItemsContainer > div > img{
+        width: 10vw;
+       
+    }
+    .orderDetailsOrderItemsContainer > div > a{
+        margin: 2vw;
+        width: 30%;
+    }
+    .orderDetailsOrderItemsContainer > div >span{
+        font:100 4vw "Roboto";
+    }
+}

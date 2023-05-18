@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import './Profile.css'
 
 const Profile = ({history}) => {
-    const {user,loading,isAuthenticated} = useSelector((state)=>state.user);
+    const {user,isAuthenticated} = useSelector((state)=>state.user);
     useEffect(()=>{
         if(isAuthenticated===false){
             history.push("/logout");
@@ -15,7 +15,7 @@ const Profile = ({history}) => {
     <Fragment>
         <MetaData title={`${user.name}'s Profile`} />
         <div className='profileContainer'>
-            <div>
+            <div >
                 <h1>My Profile</h1>
                 <img src={user.avatar.url} alt={user.name}/>
                 <Link to="/me/update">Edit Profile</Link>

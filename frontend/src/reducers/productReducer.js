@@ -175,7 +175,7 @@ export const newProductReducer =
 
 };
 
-//delete product reducer (admin)
+//delete and update product reducer (admin)
 export const productReducer =
  (state ={ product:{} },action) => {
     switch(action.type){

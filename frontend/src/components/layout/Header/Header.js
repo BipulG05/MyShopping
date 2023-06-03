@@ -28,8 +28,6 @@ function Header() {
     link2Url:"/products",
     link3Text:"Categories",
     link3Url:"/categories",
-    // link4Text:"Contact",
-    // link4Url:"/contact",
     link4Text:"About",
     link4Url:"/about",
     nav4justifyContent:"flex-start",

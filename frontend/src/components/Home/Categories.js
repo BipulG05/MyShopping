@@ -5,18 +5,7 @@ import { Link } from 'react-router-dom';
 import CategoriesImage from './CategorisImage';
 
 const Categories = () => {
-  // const categoris = [
-  //   "gogog0",
-  //   "gogog1",
-  //   "gogog2",
-  //   "gogog3",
-  //   "gogog4",
-  //   "gogog5",
-  //   "gogog6",
-  //   "gogog7",
-  //   "gogog8",
-  //   "gogog9"
-  // ]
+  
   return (
     <Fragment>
       <div className='categoriesPage'>

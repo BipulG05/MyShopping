@@ -39,6 +39,14 @@ import UsersList from './components/Admin/UsersList.js';
 import UpdateUser from './components/Admin/UpdateUser.js';
 import ProductReviews from './components/Admin/ProductReviews.js';
 import Categories from './components/Home/Categories.js';
+import CategoryList from './components/Admin/Master/CategoryList';
+import NewCategory from './components/Admin/Master/NewCategory.js';
+import UpdateCategory from './components/Admin/Master/UpdateCategory.js';
+import BrandList from './components/Admin/Master/BrandList.js';
+import NewBrand from './components/Admin/Master/NewBrand.js';
+import UpdateBrand from './components/Admin/Master/UpdateBrand.js';
+
+
 
 
 function App() {
@@ -84,6 +92,7 @@ function App() {
         <Switch>
           <ProtectedRoute exact path='/order/confirm' component={ConfirmOrder}/>
           <ProtectedRoute exact path='/order/:id' component={MyOrderDetails}/>
+          
         </Switch>
         <ProtectedRoute isAdmin={true} exact path='/admin/dashboard' component={Dashboard}/>
         <ProtectedRoute isAdmin={true} exact path='/admin/products' component={ProductList}/>
@@ -94,9 +103,12 @@ function App() {
         <ProtectedRoute isAdmin={true} exact path='/admin/users' component={UsersList}/>
         <ProtectedRoute isAdmin={true} exact path='/admin/user/:id' component={UpdateUser}/>
         <ProtectedRoute isAdmin={true} exact path='/admin/reviews' component={ProductReviews}/>
-        
-
-
+        <ProtectedRoute isAdmin={true} exact path='/admin/categories' component={CategoryList}/>
+        <ProtectedRoute isAdmin={true} exact path='/admin/catagory' component={NewCategory}/>
+        <ProtectedRoute isAdmin={true} exact path='/admin/catagory/:id' component={UpdateCategory}/>
+        <ProtectedRoute isAdmin={true} exact path='/admin/brands' component={BrandList}/>
+        <ProtectedRoute isAdmin={true} exact path='/admin/brand' component={NewBrand}/>
+        <ProtectedRoute isAdmin={true} exact path='/admin/brand/:id' component={UpdateBrand}/>
         
       <Footer/> 
    </Router>

@@ -79,6 +79,7 @@
     }
     .productCard > img {
         width:4.8vmax;
+        height: 2.4vmax;
     }
     .productCard > p {
         font-size: 0.8vmax;

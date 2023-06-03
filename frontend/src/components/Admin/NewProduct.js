@@ -20,7 +20,10 @@ const NewProduct = ({history}) => {
         "footware",
         "mobile",
         "camera",
-        "phone"
+        "phone",
+        "clothes",
+        "watches",
+        "Electronics"
     ];
     const dispatch = useDispatch();
     const alert = useAlert();

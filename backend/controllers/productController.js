@@ -156,7 +156,7 @@ exports.getProductDetails = catchAsyncError(
 //get all product
 exports.getAllProducts = catchAsyncError(
     async (req,res,next) =>{
-        const resultPerPage = 10;
+        const resultPerPage = 20;
         const productsCount = await Product.countDocuments();
 
         // console.log(req.query);
@@ -216,7 +216,6 @@ exports.createProductReview = catchAsyncError(
             success:true
         })
     })
-
 
 // get all review
 exports.getAllReview = catchAsyncError(

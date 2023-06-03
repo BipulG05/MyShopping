@@ -69,28 +69,6 @@ export const getProductDetails = (id) => async (dispatch) => {
     }
 }
 
-//new Review
-export const newReview = (reviewData) => async (dispatch) => {
-    try{ 
-        dispatch({type:NEW_REVIEW_REQUEST})
-        const config = {
-            headers:{"Content-Type":"application/json"},
-        }
-        const {data} = await axios.put(`/api/v1/review`,reviewData,config);
-        // console.log("print store data",data)
-        dispatch({
-            type:NEW_REVIEW_SUCCESS,
-            payload:data.success,
-        })
-    }
-    catch(error){
-        dispatch({
-            type:NEW_REVIEW_FAIL,
-            payload:error.response.data.message,
-        })
-    }
-}
-
 // get all product for (admin)
 export const getAdminProduct = () => async (dispatch) =>{
     try{
@@ -108,7 +86,6 @@ export const getAdminProduct = () => async (dispatch) =>{
         });
     }
 };
-
 
 //create Product (admin)
 export const createProduct = (productData) => async (dispatch) => {
@@ -166,6 +143,28 @@ export const updateProduct = (id,productData) => async (dispatch) => {
     catch(error){
         dispatch({
             type:UPDATE_PRODUCT_FAIL,
+            payload:error.response.data.message,
+        })
+    }
+}
+
+//new Review
+export const newReview = (reviewData) => async (dispatch) => {
+    try{ 
+        dispatch({type:NEW_REVIEW_REQUEST})
+        const config = {
+            headers:{"Content-Type":"application/json"},
+        }
+        const {data} = await axios.put(`/api/v1/review`,reviewData,config);
+        // console.log("print store data",data)
+        dispatch({
+            type:NEW_REVIEW_SUCCESS,
+            payload:data.success,
+        })
+    }
+    catch(error){
+        dispatch({
+            type:NEW_REVIEW_FAIL,
             payload:error.response.data.message,
         })
     }

@@ -59,6 +59,25 @@
     font: 100 1vmax "Roboto";
     color: #5e5e5e;
 }
+.userOrderStatus{
+    display: flex;
+    margin-left: 2vmax;
+    max-width:40%;
+}
+.userOrderStatus > button {
+    padding: 1vmax 1vmax;
+    text-align: center;
+    width: fit-content;
+    color: black;
+    margin: 1vmax;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax cursive;
+    outline: none;
+  }
+  .userOrderStatus > button:hover{
+    background-color: rgb(160, 156, 156);
+  }
 
 @media screen and (max-width:600px) {
     .orderDetailsContainer > h1{

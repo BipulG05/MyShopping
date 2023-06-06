@@ -36,26 +36,23 @@ const UpdateOrder = ({ history, match }) => {
 
   const [status, setStatus] = useState("");
 
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearError());
     }
-    else{
-        order && setStatus(order.orderStatus);
-    }
     if (updateError) {
       alert.error(updateError);
       dispatch(clearError());
-    }
+    } 
     if (isUpdated) {
       alert.success("Order Updated Successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
-    }
-
-    dispatch(myOrderDetails(match.params.id));
-  }, [dispatch,order, alert, error, match.params.id, isUpdated, updateError]);
-
+    } 
+    dispatch(myOrderDetails(match.params.id)); 
+  }, [dispatch, alert,error ,match.params.id, isUpdated, updateError]);
+ 
   return (
     <Fragment>
       <MetaData title="Process Order" /> 
@@ -122,7 +119,7 @@ const UpdateOrder = ({ history, match }) => {
                   <div className="orderDetailsContainerBox">
                     <div>
                       <p
-                        className={
+                        className={ 
                           order.orderStatus && order.orderStatus === "Delivered"
                             ? "greenColor"
                             : "redColor"
@@ -162,8 +159,6 @@ const UpdateOrder = ({ history, match }) => {
                   className="updateOrderForm"
                   onSubmit={updateOrderSubmitHandler}
                 >
-                  <h1>Process Order</h1>
-
                   <div>
                     <AccountTreeIcon />
                     <select value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -172,7 +167,7 @@ const UpdateOrder = ({ history, match }) => {
 
                       {order.orderStatus === "Processing" && (
                         <option value="Shipped">Shipped</option>
-                      )}
+                      )} 
 
                       {order.orderStatus === "Shipped" && (
                         <option value="Delivered">Delivered</option>

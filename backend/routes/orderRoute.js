@@ -9,7 +9,7 @@ router.route('/order/:id').get(isAuthenticateduser,getSingleOrder);
 router.route('/orders/me').get(isAuthenticateduser,getMyOrder);
 
 router.route('/admin/orders').get(isAuthenticateduser,autherisedRole('admin'),getAllOrder);
-router.route('/admin/order/:id').put(isAuthenticateduser,autherisedRole('admin'),updateOrderStatus)
+router.route('/admin/order/:id').put(isAuthenticateduser,updateOrderStatus)
 .delete(isAuthenticateduser,autherisedRole('admin'),deleteOrder);
 
 

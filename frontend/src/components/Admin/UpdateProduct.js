@@ -6,13 +6,14 @@ import { Button } from '@material-ui/core';
 import './NewProduct.css';
 import MetaData from '../layout/MetaData';
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import DescriptionIcon from "@material-ui/icons/Description";
+// import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
-
+import Joditeditor from 'jodit-react';
+import { useRef } from 'react';
 
 const UpdateProduct = ({history,match}) => {
     const categories = [
@@ -25,6 +26,8 @@ const UpdateProduct = ({history,match}) => {
     const productId = match.params.id;
     const dispatch = useDispatch();
     const alert = useAlert();
+    const editor = useRef(null);
+    
 
     const {loading , error:updateEerror ,isUpdated} = useSelector((state)=>state.product)
     const {error,product} = useSelector((state)=>state.productDetails)
@@ -136,7 +139,7 @@ const UpdateProduct = ({history,match}) => {
                         onChange={(e)=>setPrice(e.target.value)}/>
 
                     </div>
-                    <div>
+                    {/* <div>
                         <DescriptionIcon/>
                         <textarea
                         placeholder='Product Description'
@@ -146,6 +149,9 @@ const UpdateProduct = ({history,match}) => {
                         value={description}
                         onChange={(e)=>setDescription(e.target.value)}>
                         </textarea>
+                    </div> */}
+                    <div>
+                        <Joditeditor ref={editor} value={description} onChange={(content) => setDescription(content)} />
                     </div>
                     <div>
                         <AccountTreeIcon/>

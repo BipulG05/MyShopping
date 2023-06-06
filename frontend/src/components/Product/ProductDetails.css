@@ -107,12 +107,17 @@
 }
 .detailsBlock-4 {
     color:rgba(0,0,0,0.895);
+    margin-top: 0.1vmax;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(0, 0, 0, 0.1);
     font:500 1.2vmax sans-serif;
 }
-.detailsBlock-4 > p{
+/* .detailsBlock-4 > p{
     color:rgba(0,0,0,0.535);
     font:300 0.8vmax sans-serif;
-}
+} */
 .submitReview{
     border: none;
     cursor: pointer;

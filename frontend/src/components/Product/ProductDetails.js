@@ -12,6 +12,7 @@ import {addToCart} from '../../actions/cartAction';
 import {Dialog,DialogActions,DialogContent,DialogTitle,Button} from '@material-ui/core'
 import { Rating } from '@material-ui/lab';
 import { NEW_REVIEW_RESET } from '../../constants/productConstants';
+import Parser from 'html-react-parser';
 
 
 
@@ -29,16 +30,16 @@ const ProductDetails = ({match}) => {
   const[rating,setRating] = useState(0)
   const[comment,setComment] = useState('')
 
-
+  
 
   const dscquantity = () =>{
-    if(quantity>1){
+    if(quantity>1){ 
       const qty = quantity-1;
       setQuentity(qty);
     }
     else{
       alert.info('Number of items can not be less then one(1)');
-    }
+    } 
   }
   const incquantity = () =>{
     if(product.stock > quantity){
@@ -143,17 +144,20 @@ const ProductDetails = ({match}) => {
                   </b>
                 </p>
               </div>
-              <div classNamee='detailsBlock-4'>
-                Description : <p>{product.description}</p>
-              </div>
+              {/* <div classNamee='detailsBlock-4'>
+                {product.description && Parser(product.description)}
+              </div> */}
               <button onClick={submitReviewToggle} className='submitReview'>Submit Review</button>
             </div>
           </div>
+          <div className='detailsBlock-4'>
+                {product.description && Parser(product.description)}
+          </div>
           <h3 className='reviewsHeading'>REVIEWS</h3>
-          <Dialog
+          <Dialog 
           aria-labelledby='simple-dialog-title'
           open={open}
-         
+          
           > 
             <DialogTitle>Submit Review</DialogTitle>
             <DialogContent className='submitDialog'>
@@ -176,7 +180,7 @@ const ProductDetails = ({match}) => {
             </DialogActions>
           </Dialog>
 
-
+          
 
           {product.reviews && product.reviews[0] ? (
             <div className='reviews'>{

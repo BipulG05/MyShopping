@@ -6,12 +6,16 @@ import { Button } from '@material-ui/core';
 import './NewProduct.css';
 import MetaData from '../layout/MetaData';
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import DescriptionIcon from "@material-ui/icons/Description";
+// import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+// import RichTextEditor from './RichTextEditor';
+import Joditeditor from 'jodit-react';
+import { useRef } from 'react';
+
 
 
 const NewProduct = ({history}) => {
@@ -27,16 +31,18 @@ const NewProduct = ({history}) => {
     ];
     const dispatch = useDispatch();
     const alert = useAlert();
+    
 
     const {loading , error ,success} = useSelector((state)=>state.newProduct)
-    
+    // const [edvalu,setEdvalue] = useState('');
     const [name,setName] = useState('');
     const [price,setPrice] = useState(0);
-    const [description,setDescription] = useState('');
+    const [description,setDescription] = useState('<b>Please Erase this line and then write here "The description for this product" </b>');
     const [category,setCategory] = useState('');
     const [stock,setStock] = useState(0);
     const [images,setImages] = useState([]);
     const [imagesPrevew,setImagesPrevew] = useState([]);
+    const editor = useRef(null);
 
     useEffect(()=>{
         if(error){
@@ -84,6 +90,8 @@ const NewProduct = ({history}) => {
             reader.readAsDataURL(file);
         })
     };
+    
+    
 
 
   return (
@@ -117,7 +125,7 @@ const NewProduct = ({history}) => {
                         onChange={(e)=>setPrice(e.target.value)}/>
 
                     </div>
-                    <div>
+                    {/* <div>
                         <DescriptionIcon/>
                         <textarea
                         placeholder='Product Description'
@@ -127,6 +135,9 @@ const NewProduct = ({history}) => {
                         value={description}
                         onChange={(e)=>setDescription(e.target.value)}>
                         </textarea>
+                    </div> */}
+                    <div>
+                        <Joditeditor  ref={editor} value={description} onChange={(content) => setDescription(content)} />
                     </div>
                     <div>
                         <AccountTreeIcon/>

@@ -4,12 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import MetaData from '../layout/MetaData';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
-import { clearError, myOrderDetails } from '../../actions/orderAction';
+import { clearError, myOrderDetails, updateOrder } from '../../actions/orderAction';
 import Loder from '../layout/Loader/Loder';
 import { useAlert } from 'react-alert';
+import {Button} from '@material-ui/core'
+import { UPDATE_ORDER_RESET } from '../../constants/orderConstants';
+
 
 const MyOrderDetails = ({match}) => {
     const {order,error,loading} = useSelector((state)=>state.orderDetails);
+    const { error: updateError, isUpdated } = useSelector((state) => state.order);
+
     const dispatch = useDispatch();
     const alert = useAlert();
 
@@ -18,8 +23,28 @@ const MyOrderDetails = ({match}) => {
             alert.error(error);
             dispatch(clearError());
         }
+        if (updateError) {
+            alert.error(updateError);
+            dispatch(clearError());
+          } 
+          if (isUpdated) {
+            alert.success("Order Updated Successfully");
+            dispatch({ type: UPDATE_ORDER_RESET });
+          }
         dispatch(myOrderDetails(match.params.id));
-    },[dispatch,alert,error,match.params.id]);
+    },[dispatch,updateError,alert,isUpdated,error,match.params.id]);
+
+    const updateOrderStatus = (e) =>{
+        e.preventDefault();
+
+        const myForm = new FormData();
+
+        myForm.set("status", "cancel");
+
+        dispatch(updateOrder(match.params.id, myForm));
+    }
+
+
   return (
     <Fragment>
         {loading ? (<Loder/>) :
@@ -28,7 +53,7 @@ const MyOrderDetails = ({match}) => {
                 <MetaData title="Order Details" /> 
                 <div className='orderDetailsPage'>
                     <div className='orderDetailsContainer'>
-                        <Typography component="h1">Order #{order && order._id}</Typography>
+                        <Typography component="h1">Order id : {order && order._id}</Typography>
                         <Typography>Shipping Info</Typography>
                         <div className='orderDetailsContainerBox'>
                             <div>
@@ -87,6 +112,12 @@ const MyOrderDetails = ({match}) => {
                                 ))  
                             }
                         </div>
+                    </div>
+                    <div className='userOrderStatus'>
+                        {order.orderStatus && (order.orderStatus !== "cancel" ||  order.orderStatus === "Processing") && 
+                            <Button variant="outlined" onClick={updateOrderStatus}  color='primary'>Cancel Order</Button>
+                        }
+                        <Button variant="outlined"  color='primary'>Need help?</Button>
                     </div>
                 </div>
 
